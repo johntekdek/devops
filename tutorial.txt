@@ -13,4 +13,5 @@
 
 TESTS
 
-- need to test the end points!
+- Need to test the end points!
+- Create fixture for the app and database

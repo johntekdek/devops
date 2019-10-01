@@ -4,8 +4,9 @@ services:
   users:
     build:
       context: .
-      args: # Environment variables available at build-time
-          - http_proxy=http://dia2.santanderuk.gs.corp:80
+      args:
+        # Environment variables available at build-time
+        - http_proxy=http://dia2.santanderuk.gs.corp:80
       dockerfile: Dockerfile
     entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
@@ -16,7 +17,7 @@ services:
       - FLASK_APP=project/__init__.py
       - FLASK_ENV=development      
       - APP_SETTINGS=project.config.DevelopmentConfig
-      - COMPOSE_CONVERT_WINDOWS_PATHS=1
+    
       - DATABASE_URL=postgresql://postgres:postgres@users-db:5432/users_dev  # new
       - DATABASE_TEST_URL=postgresql://postgres:postgres@users-db:5432/users_test
     depends_on:
