@@ -1,0 +1,8 @@
+-- remember to 
+
+- steps in development environement
+1 get the app
+2 get development,testing, production config set up
+3 use docker compose and set services
+4 build the imgae and run the container
+4 get postgress up and running in another container and link to the user service do this in a new folder called db
