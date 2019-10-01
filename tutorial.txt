@@ -5,13 +5,23 @@
 2 get development,testing, production config set up
 3 use docker compose and set services
 4 build the imgae and run the container
-4 get postgress up and running in another container and link to the user service do this in a new folder called db. create a script that will run on init
+5 get postgress up and running in another container and link to the user service do this in a new folder called db. create a script that will run on init
 6 add the database urls to the docker compose environment i.e the test url and 
 7 add a script file that makes sure that the  postgress service is up and running before  running the user service
 8 add an entry point to the dockercompose file, this will nullify any CMD in the docker file
 9 update the cli to have the ablility to create database and commit
+10 refactor the app to use blueprints which are self-contained components used for encapsulating code , templates and static files
 
 TESTS
 
 - Need to test the end points!
 - Create fixture for the app and database
+- then you test the following:
+1 test the configuration settings
+  - development config
+  - testing config
+  - production config
+
+2 functional TESTS
+ - test the status code returned
+ - test the contents of the returned data
