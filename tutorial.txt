@@ -5,4 +5,12 @@
 2 get development,testing, production config set up
 3 use docker compose and set services
 4 build the imgae and run the container
-4 get postgress up and running in another container and link to the user service do this in a new folder called db
+4 get postgress up and running in another container and link to the user service do this in a new folder called db. create a script that will run on init
+6 add the database urls to the docker compose environment i.e the test url and 
+7 add a script file that makes sure that the  postgress service is up and running before  running the user service
+8 add an entry point to the dockercompose file, this will nullify any CMD in the docker file
+9 update the cli to have the ablility to create database and commit
+
+TESTS
+
+- need to test the end points!
