@@ -1,6 +1,6 @@
 -- remember to 
 
-- steps in development environement
+- Steps in development environement
 1 get the app
 2 get development,testing, production config set up
 3 use docker compose and set services
@@ -11,6 +11,8 @@
 8 add an entry point to the dockercompose file, this will nullify any CMD in the docker file
 9 update the cli to have the ablility to create database and commit
 10 refactor the app to use blueprints which are self-contained components used for encapsulating code , templates and static files
+11 create and instacne of the blueprints class and bind to ping
+12 Add this to your cv --- analytics and visulaization to grant visibility to and analytics of post trade
 
 TESTS
 
@@ -25,3 +27,9 @@ TESTS
 2 functional TESTS
  - test the status code returned
  - test the contents of the returned data
+
+3 Routes 
+ - write a test 
+ - run the test to ensure it fails
+ - write just enough code to get the test to pass(green)
+ - refactor if necessary
