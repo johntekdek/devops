@@ -1,0 +1,40 @@
+FROM python:3.7.4-alpine
+
+ENV http_proxy http://dia2.santanderuk.gs.corp:80
+ENV https_proxy http://dia2.santanderuk.gs.corp:80
+ENV HTTP_PROXY http://dia2.santanderuk.gs.corp:80
+ENV HTTPS_PROXY http://dia2.santanderuk.gs.corp:80
+
+# install dependencies
+RUN apk update && \
+    apk add --virtual build-deps gcc python-dev musl-dev && \
+    apk add postgresql-dev && \
+    apk add netcat-openbsd
+
+
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV FLASK_ENV production
+ENV APP_SETTINGS project.config.ProductionConfig
+
+
+
+
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install --proxy http://dia2.santanderuk.gs.corp:80 --trusted-host=pypi.org --trusted-host=files.pythonhosted.org -r requirements.txt
+
+
+# add app
+COPY . /usr/src/app
+
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
+
+# run gunicorn
+CMD gunicorn --bind 0.0.0.0:$PORT manage:app

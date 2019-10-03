@@ -1,6 +1,6 @@
 import json
-from project import db
-from project.api.models import User
+from project.tests.utils import add_user,recreate_db
+
 
 def test_add_json(test_app,test_database):
     client = test_app.test_client()
@@ -37,7 +37,7 @@ def test_add_user_invalid_json_keys(test_app, ):
     client = test_app.test_client()
     resp = client.post(
         '/users',
-        data=json.dumps({"email": "john@testdriven.io"}),
+        data=json.dumps({"email": "michael@mherman.org"}),
         content_type='application/json',
     )
     data = json.loads(resp.data.decode())
@@ -72,9 +72,7 @@ def test_add_user_duplicate_email(test_app, test_database):
 
 
 def test_single_user(test_app, test_database):
-    user = User(username='jeffrey', email='jeffrey@testdriven.io')
-    db.session.add(user)
-    db.session.commit()
+    user = add_user(username='jeffrey', email='jeffrey@testdriven.io')
     client = test_app.test_client()
     resp = client.get(f'/users/{user.id}')
     data = json.loads(resp.data.decode())
@@ -100,3 +98,18 @@ def test_single_user_incorrect_id(test_app, test_database):
     assert resp.status_code == 404
     assert 'User does not exist' in data['message']
     assert 'fail' in data['status']
+
+def test_all_users(test_app, test_database):
+    recreate_db()  
+    add_user('michael', 'michael@mherman.org')
+    add_user('fletcher', 'fletcher@notreal.com')
+    client = test_app.test_client()
+    resp = client.get('/users')
+    data = json.loads(resp.data.decode())
+    assert resp.status_code == 200
+    assert len(data['data']['users']) == 2
+    assert 'michael' in data['data']['users'][0]['username']
+    assert 'michael@mherman.org' in data['data']['users'][0]['email']
+    assert 'fletcher' in data['data']['users'][1]['username']
+    assert 'fletcher@notreal.com' in data['data']['users'][1]['email']
+    assert 'success' in data['status']

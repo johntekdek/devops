@@ -27,9 +27,13 @@ TESTS
 2 functional TESTS
  - test the status code returned
  - test the contents of the returned data
+ - test the id is not provided
+ - test if the id exists
 
 3 Routes 
  - write a test 
  - run the test to ensure it fails
  - write just enough code to get the test to pass(green)
  - refactor if necessary
+
+4 
