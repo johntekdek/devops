@@ -3,8 +3,7 @@ version: '3.7'
 services:
   users:
     build:
-      context: .
-    
+      context: .    
       dockerfile: Dockerfile
     entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
