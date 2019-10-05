@@ -1,9 +1,9 @@
 FROM python:3.7.4-alpine
 
-ENV http_proxy http://dia2.santanderuk.gs.corp:80
-ENV https_proxy http://dia2.santanderuk.gs.corp:80
-ENV HTTP_PROXY http://dia2.santanderuk.gs.corp:80
-ENV HTTPS_PROXY http://dia2.santanderuk.gs.corp:80
+#ENV http_proxy http://dia2.santanderuk.gs.corp:80
+#ENV https_proxy http://dia2.santanderuk.gs.corp:80
+#ENV HTTP_PROXY http://dia2.santanderuk.gs.corp:80
+#ENV HTTPS_PROXY http://dia2.santanderuk.gs.corp:80
 
 # install dependencies
 RUN apk update && \
@@ -22,7 +22,7 @@ WORKDIR /usr/src/app
 
 
 COPY ./requirements.txt .
-RUN pip install --proxy http://dia2.santanderuk.gs.corp:80 --trusted-host=pypi.org --trusted-host=files.pythonhosted.org -r requirements.txt
+RUN pip install -r requirements.txt
 
 # add entrypoint.sh
 COPY ./entrypoint.sh /usr/src/app/entrypoint.sh

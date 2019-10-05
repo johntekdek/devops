@@ -4,9 +4,7 @@ services:
   users:
     build:
       context: .
-      args:
-        # Environment variables available at build-time
-        - http_proxy=http://dia2.santanderuk.gs.corp:80
+    
       dockerfile: Dockerfile
     entrypoint: ['/usr/src/app/entrypoint.sh']
     volumes:
